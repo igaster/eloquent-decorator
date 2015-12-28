@@ -1,11 +1,9 @@
-<?php namespace Dimsav\Translatable\Test\Model;
+<?php namespace igaster\EloquentDecorator\Test\Models;
 
-// use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class City extends Eloquent
+class Article extends Eloquent
 {
-    use Translatable;
     public $array = 'article';
     public $fillable = ['title', 'body'];
 }
