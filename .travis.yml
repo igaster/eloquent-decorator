@@ -2,12 +2,11 @@ language: php
 
 php:
   - 5.5
-  - 5.4
   - hhvm
 
 before_script:
   - cp .env.travis .env
-  - mysql -e 'create database decorator_test;
+  - mysql -e 'create database decorator_test;'
   - composer self-update
   - composer install --no-interaction
 

@@ -45,7 +45,7 @@ implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, 
 
 class EloquentDecoratorTest extends TestCase
 {
-    // use DatabaseTransactions;
+    use DatabaseTransactions;
 
     public function setUp()
     {
