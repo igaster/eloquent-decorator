@@ -34,12 +34,11 @@ class EloquentDecoratorTest extends TestCase
     {
         parent::setUp();
 
+        // Run Test Migrations
         $this->artisan('migrate', [
             // '--database' => 'testing',
             '--realpath' => realpath(__DIR__.'/migrations'),
         ]);
-
-        // $this->model = User::find($this->model->id);
     }
 
     public function test_eloquent_decorator(){

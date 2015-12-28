@@ -20,7 +20,7 @@
     },    
     "autoload": {
         "psr-4" : {
-            "igaster\\EloquentDecorator\\" : "src/"
+            "igaster\\EloquentDecorator\\" : "src/",
             "igaster\\EloquentDecorator\\Test\\Models" : "tests/Models/"
         }
     },
