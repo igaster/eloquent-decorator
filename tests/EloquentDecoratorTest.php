@@ -16,7 +16,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Routing\UrlRoutable;
 use Illuminate\Contracts\Queue\QueueableEntity;
 
-use gaster\EloquentDecorator\Test\Models\Article;
+use igaster\EloquentDecorator\Test\Models\Article;
 
 class ArticleDecorator 
 implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
