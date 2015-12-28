@@ -4,6 +4,8 @@ php:
   - 5.5
   - hhvm
 
+sudo: false
+
 before_script:
   - cp .env.travis .env
   - mysql -e 'create database decorator_test;'
