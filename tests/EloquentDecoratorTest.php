@@ -35,7 +35,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Routing\UrlRoutable;
 use Illuminate\Contracts\Queue\QueueableEntity;
 
-class Decorator 
+class ArticleDecorator 
 implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
 {
 	use EloquentDecoratorTrait;
@@ -79,8 +79,17 @@ class EloquentDecoratorTest extends TestCase
     }
 
     public function test_eloquent_decorator(){
-    	// $user = new User();
-    	// $admin = Decorator::wrap($user);
+    	$original = Article::create([
+    		'title' => 'Title 1',
+    		'body'	=> 'Body 1',
+    	]);
+
+    	$original = Article::find($original->id);
+    	$decorated = ArticleDecorator::wrap($original);
+
+		$this->assertEquals($original->title, 'Title 1');
+		$this->assertEquals($decorated->title, 'Title 1');
+
     }
 
 
