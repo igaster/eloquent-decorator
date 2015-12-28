@@ -1,5 +1,6 @@
 <?php namespace igaster\EloquentDecorator;
 
+
 // Add functions to  class without extending it!
 
 /*----------------------------------

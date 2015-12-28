@@ -1,0 +1,13 @@
+language: php
+
+php:
+  - 5.5
+  - 5.4
+  - hhvm
+
+before_script:
+  - mysql-e 'create database IF NOT EXISTS decorator_test;
+
+install: travis_retry composer install --no-interaction --prefer-source
+
+script: vendor/bin/phpunit --verbose
