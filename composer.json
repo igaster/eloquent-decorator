@@ -1,9 +1,9 @@
 {
-    "name": "igaster/laravel-translate-eloquent",
+    "name": "igaster/eloquent-decorator",
 	"description": "Translate any column in your Database in Laravel models",
-    "keywords": ["translation", "localization", "translate-model", "translate-database", "laravel-5.x", "package", "trait"],
+    "keywords": ["decorator pattern", "decorate eloquent", "decorate models", "decorate", "decorator","laravel-5.x", "trait"],
     "license": "MIT",
-    "homepage": "https://github.com/igaster/laravel-translate-eloquent.git",
+    "homepage": "https://github.com/igaster/eloquent-decorator.git",
     "authors": [
         {
             "name": "Giannis Gasteratos",
@@ -22,8 +22,7 @@
     },    
     "autoload": {
         "psr-4" : {
-            "igaster\\EloquentDecorator\\" : "src/",
-            "igaster\\EloquentDecorator\\Test\\" : "tests"
+            "igaster\\EloquentDecorator\\" : "src/"
         }
     },
     "minimum-stability": "dev"

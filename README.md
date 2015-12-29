@@ -1,8 +1,8 @@
 ## Description
-[![Laravel](https://img.shields.io/badge/Laravel-5.x-orange.svg?style=flat-square)](http://laravel.com)
-[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![Downloads](https://img.shields.io/packagist/dt/igaster/eloquent-decorator.svg?style=flat-square)](https://packagist.org/packages/igaster/eloquent-decorator)
+[![Laravel](https://img.shields.io/badge/Laravel-5.x-orange.svg)](http://laravel.com)
+[![Downloads](https://img.shields.io/packagist/dt/igaster/eloquent-decorator.svg)](https://packagist.org/packages/igaster/eloquent-decorator)
 [![Build Status](https://travis-ci.org/igaster/eloquent-decorator.svg?branch=master)](https://travis-ci.org/igaster/eloquent-decorator)
+[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://tldrlegal.com/license/mit-license)
 
 A simple Trait that implements the Decorator pattern on Laravel eloquent models.
 
