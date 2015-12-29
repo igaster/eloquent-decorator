@@ -15,13 +15,15 @@
         "illuminate/support": "~5.2"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.0",        
+        "illuminate/database": "~5.2",
+        "orchestra/testbench": "~3.0", 
+        "vlucas/phpdotenv": "~2.0",      
         "phpunit/phpunit": "~4.0"
     },    
     "autoload": {
         "psr-4" : {
             "igaster\\EloquentDecorator\\" : "src/",
-            "igaster\\EloquentDecorator\\Test\\Models\\" : "tests/Models/"
+            "igaster\\EloquentDecorator\\Test\\" : "tests"
         }
     },
     "minimum-stability": "dev"

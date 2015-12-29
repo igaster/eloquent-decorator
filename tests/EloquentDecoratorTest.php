@@ -1,57 +1,107 @@
 <?php
 
-use Orchestra\Testbench\TestCase;
-
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-use igaster\EloquentDecorator\EloquentDecoratorTrait;
-use igaster\EloquentDecorator\DecoratorTrait;
-
-// ------------- EloquentDecorator Helper Clases ------------------
-
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Routing\UrlRoutable;
-use Illuminate\Contracts\Queue\QueueableEntity;
-
 use igaster\EloquentDecorator\Test\Models\Article;
+use igaster\EloquentDecorator\Test\Models\ArticleDecorator;
 
-class ArticleDecorator 
-implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
+use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Database\Eloquent\Model as Eloquent;
+
+class EloquentDecoratorTest extends Orchestra\Testbench\TestCase
 {
-	use EloquentDecoratorTrait;
-}
+    use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-// -----------------------------------------------
+    // -----------------------------------------------
+    //  Load .env Environment Variables
+    // -----------------------------------------------
 
-class EloquentDecoratorTest extends TestCase
-{
-    use DatabaseTransactions;
+    public static function setUpBeforeClass()
+    {
+        if (file_exists(__DIR__.'/../.env')) {
+            $dotenv = new Dotenv\Dotenv(__DIR__.'/../');
+            $dotenv->load();
+        }
+    }
 
+    // -----------------------------------------------
+    //  Setup Database
+    // -----------------------------------------------
+
+    protected $db;
     public function setUp()
     {
         parent::setUp();
 
-        // Run Test Migrations
-        $this->artisan('migrate', [
-            // '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/migrations'),
+        Eloquent::unguard();
+        $db = new DB;
+        $db->addConnection([
+            'driver' => 'sqlite',
+            'database' => ':memory:',
         ]);
+        $db->bootEloquent();
+        $db->setAsGlobal();
+        $this->db=$db;
+
+        // -- Set  migrations
+        $db->schema()->create('articles', function ($table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->string('body');
+            $table->timestamps();
+        });
     }
 
+    public function tearDown() {
+        $this->db->schema()->drop('articles');
+    }
+
+    // -----------------------------------------------
+
     public function test_eloquent_decorator(){
+
+        // Set original Object
     	$original = Article::create([
-    		'title' => 'Title 1',
-    		'body'	=> 'Body 1',
+    		'title' => 'One',
+    		'body'	=> 'Body',
     	]);
 
+        // Decorete it
     	$original = Article::find($original->id);
     	$decorated = ArticleDecorator::wrap($original);
 
-		$this->assertEquals($original->title, 'Title 1');
-		$this->assertEquals($decorated->title, 'Title 1');
+        // Decoretor can access attributes on original object
+		$this->assertEquals($original->title, 'One');
+		$this->assertEquals($decorated->title, 'One');
+
+        // Set value on original
+        $original->title = 'Two';
+        $this->assertEquals($decorated->title, 'Two');
+
+        // Set value on decorated
+        $decorated->title='Three';
+        $this->assertEquals($decorated->title, 'Three');
+
+        // Save in Database (from the decorated)
+        $decorated->title='Four';
+        $decorated->body='Five';
+        $decorated->author='Giannis';
+        $decorated->save();
+
+        $original = Article::find($original->id);
+
+        // Update attribute on original Object
+        $this->assertEquals($original->title, 'Four');
+        $this->assertEquals($decorated->title, 'Four');
+
+        // Don't update overriden attribute on original object
+        $this->assertEquals($original->body, 'Body');
+        $this->assertEquals($decorated->body, 'Five');
+
+        // Array access
+        $this->assertEquals($decorated['title'], 'Four');
+
+        // Array access
+        $this->assertEquals($decorated['title'], 'Four');
+
     }
 
 }
