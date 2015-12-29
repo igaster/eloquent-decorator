@@ -7,10 +7,7 @@ php:
 sudo: false
 
 before_script:
-  - cp .env.travis .env
-  - mysql -e 'create database decorator_test;'
   - composer self-update
-  - composer install --no-interaction
 
 install: travis_retry composer install --no-interaction --prefer-source
 
