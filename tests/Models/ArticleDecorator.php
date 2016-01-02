@@ -1,4 +1,4 @@
-<?php namespace igaster\EloquentDecorator\Test\Models;
+<?php namespace igaster\EloquentDecorator\Tests\Models;
 
 // ------------- EloquentDecorator Helper Clases ------------------
 

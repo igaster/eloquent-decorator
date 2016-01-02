@@ -1,48 +1,21 @@
 <?php
 
-use igaster\EloquentDecorator\Test\Models\Article;
-use igaster\EloquentDecorator\Test\Models\ArticleDecorator;
+use igaster\EloquentDecorator\Tests\Models\Article;
+use igaster\EloquentDecorator\Tests\Models\ArticleDecorator;
+use igaster\EloquentDecorator\Tests\TestCase\TestCaseWithDatbase;
 
-use Illuminate\Database\Capsule\Manager as DB;
-use Illuminate\Database\Eloquent\Model as Eloquent;
-
-class EloquentDecoratorTest extends Orchestra\Testbench\TestCase
+class EloquentDecoratorTest extends TestCaseWithDatbase
 {
-    use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-    // -----------------------------------------------
-    //  Load .env Environment Variables
-    // -----------------------------------------------
-
-    public static function setUpBeforeClass()
-    {
-        if (file_exists(__DIR__.'/../.env')) {
-            $dotenv = new Dotenv\Dotenv(__DIR__.'/../');
-            $dotenv->load();
-        }
-    }
-
     // -----------------------------------------------
     //  Setup Database
     // -----------------------------------------------
 
-    protected $db;
     public function setUp()
     {
         parent::setUp();
-
-        Eloquent::unguard();
-        $db = new DB;
-        $db->addConnection([
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-        ]);
-        $db->bootEloquent();
-        $db->setAsGlobal();
-        $this->db=$db;
-
+        
         // -- Set  migrations
-        $db->schema()->create('articles', function ($table) {
+        $this->database->schema()->create('articles', function ($table) {
             $table->increments('id');
             $table->string('title');
             $table->string('body');
@@ -51,7 +24,7 @@ class EloquentDecoratorTest extends Orchestra\Testbench\TestCase
     }
 
     public function tearDown() {
-        $this->db->schema()->drop('articles');
+        $this->database->schema()->drop('articles');
     }
 
     // -----------------------------------------------

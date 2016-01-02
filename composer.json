@@ -22,7 +22,8 @@
     },    
     "autoload": {
         "psr-4" : {
-            "igaster\\EloquentDecorator\\" : "src/"
+            "igaster\\EloquentDecorator\\" : "src/",
+            "igaster\\EloquentDecorator\\Tests\\" : "tests/"
         }
     },
     "minimum-stability": "dev"
