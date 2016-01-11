@@ -87,7 +87,7 @@ trait EloquentDecoratorTrait {
 	}
 
 	// ------------------------------------------------------------
-	// ArrayAccess interface
+	// UrlRoutable interface
 	// ------------------------------------------------------------
 
 	public function getRouteKey(){

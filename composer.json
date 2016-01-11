@@ -1,6 +1,6 @@
 {
     "name": "igaster/eloquent-decorator",
-	"description": "Translate any column in your Database in Laravel models",
+	"description": "A simple Trait that implements the Decorator pattern on Laravel eloquent models.",
     "keywords": ["decorator pattern", "decorate eloquent", "decorate models", "decorate", "decorator","laravel-5.x", "trait"],
     "license": "MIT",
     "homepage": "https://github.com/igaster/eloquent-decorator.git",
