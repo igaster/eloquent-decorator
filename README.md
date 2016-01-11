@@ -35,7 +35,7 @@ and install with `composer update
 
 ## Implement the Decorator Pattern
 
-1. Class Decleration:
+#### Step 1: Class Decleration:
 
 Your class should implement some interfaces to mimic the behavior of Eloquent models:
 
@@ -62,7 +62,7 @@ class SuperUser implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, Q
 }
 ```
 
-2. Decorating an Eloquent model:
+#### Step 2: Decorating an Eloquent model:
 
 ```php
 	$user = User::find(1);
@@ -83,6 +83,6 @@ class SuperUser implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, Q
 }
 ```
 
-3. Need a constructor?
+#### Need a constructor?
 
 You have to override `EloquentDecoratorTrait` and create your own factory function. Dont forget to call `self::wrap($object)` at the end.
