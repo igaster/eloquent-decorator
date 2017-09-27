@@ -86,17 +86,24 @@ trait EloquentDecoratorTrait {
 		return $this->object->getQueueableId();
 	}
 
+    public function getQueueableConnection(){
+    	return $this->object->getQueueableConnection();
+    }
+
 	// ------------------------------------------------------------
 	// UrlRoutable interface
 	// ------------------------------------------------------------
 
-	public function getRouteKey(){
+    public function getRouteKey(){
 		return $this->object->getRouteKey();
-	}
+    }
 
-	public function getRouteKeyName(){
+    public function getRouteKeyName(){
 		return $this->object->getRouteKeyName();
-	}
+    }
 
+    public function resolveRouteBinding($value){
+		return $this->object->resolveRouteBinding($value);
+    }
 
 }
