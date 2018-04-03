@@ -3,7 +3,7 @@
 
 Implements Eloquent\Model interfaces
 
-Class decleration should:
+Class declaration should:
 	implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
 
 Add in use section:
