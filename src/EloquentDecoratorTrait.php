@@ -90,6 +90,10 @@ trait EloquentDecoratorTrait {
     	return $this->object->getQueueableConnection();
     }
 
+	public function getQueueableRelations(){
+		return $this->object->getQueueableRelations();
+	}
+
 	// ------------------------------------------------------------
 	// UrlRoutable interface
 	// ------------------------------------------------------------
