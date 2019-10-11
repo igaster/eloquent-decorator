@@ -10,10 +10,10 @@ class EloquentDecoratorTest extends TestCaseWithDatbase
     //  Setup Database
     // -----------------------------------------------
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-        
+
         // -- Set  migrations
         $this->database->schema()->create('articles', function ($table) {
             $table->increments('id');
@@ -23,40 +23,42 @@ class EloquentDecoratorTest extends TestCaseWithDatbase
         });
     }
 
-    public function tearDown() {
+    public function tearDown(): void
+    {
         $this->database->schema()->drop('articles');
     }
 
     // -----------------------------------------------
 
-    public function test_eloquent_decorator(){
+    public function test_eloquent_decorator()
+    {
 
         // Set original Object
-    	$original = Article::create([
-    		'title' => 'One',
-    		'body'	=> 'Body',
-    	]);
+        $original = Article::create([
+            'title' => 'One',
+            'body'  => 'Body',
+        ]);
 
         // Decorete it
-    	$original = Article::find($original->id);
-    	$decorated = ArticleDecorator::wrap($original);
+        $original = Article::find($original->id);
+        $decorated = ArticleDecorator::wrap($original);
 
         // Decoretor can access attributes on original object
-		$this->assertEquals($original->title, 'One');
-		$this->assertEquals($decorated->title, 'One');
+        $this->assertEquals($original->title, 'One');
+        $this->assertEquals($decorated->title, 'One');
 
         // Set value on original
         $original->title = 'Two';
         $this->assertEquals($decorated->title, 'Two');
 
         // Set value on decorated
-        $decorated->title='Three';
+        $decorated->title = 'Three';
         $this->assertEquals($decorated->title, 'Three');
 
         // Save in Database (from the decorated)
-        $decorated->title='Four';
-        $decorated->body='Five';
-        $decorated->author='Giannis';
+        $decorated->title = 'Four';
+        $decorated->body = 'Five';
+        $decorated->author = 'Giannis';
         $decorated->save();
 
         $original = Article::find($original->id);
